@@ -11,3 +11,5 @@ Route::get('/', [StudentController::class, 'index']);
 // Define route for Students page (if it's a separate page)
 Route::get('/Students', [StudentController::class, 'index']);
 
+// create
+//Rout::post
