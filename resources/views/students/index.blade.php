@@ -40,6 +40,25 @@
 <div class="container mt-5">
     <h1 class="mb-4 text-center">Students List</h1>
 
+    <!-- Bootstrap Alert for Success and Error Messages -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
@@ -47,6 +66,7 @@
                 <th>Email</th>
                 <th>Age</th>
                 <th>Course</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody id="studentsTableBody">
@@ -56,6 +76,15 @@
                     <td>{{ $student->email }}</td>
                     <td>{{ $student->age }}</td>
                     <td>{{ $student->course }}</td>
+                    <td>
+    <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning">Edit </a>
+    <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+    </form>
+</td>
+                    
                 </tr>
             @endforeach
         </tbody>
