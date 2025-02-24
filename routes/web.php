@@ -11,3 +11,9 @@ Route::get('/students', [StudentController::class, 'index'])->name('students.ind
 
 // Define route for storing new student
 Route::post('/students', [StudentController::class, 'store'])->name('students.store');
+
+// Define route for updating a student
+Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
+
+// Define route for deleting a student
+Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
