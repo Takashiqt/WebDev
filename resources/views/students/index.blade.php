@@ -1,3 +1,5 @@
+
+// filepath: c:\xampp\htdocs\activity 4\WebDev\resources\views\students\index.blade.php
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +42,14 @@
 <div class="container mt-5">
     <h1 class="mb-4 text-center">Students List</h1>
 
+    <!-- Logout Button -->
+    <div class="text-right mb-4">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit" class="btn btn-secondary">Logout</button>
+        </form>
+    </div>
+
     <!-- Bootstrap Alert for Success and Error Messages -->
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -77,14 +87,13 @@
                     <td>{{ $student->age }}</td>
                     <td>{{ $student->course }}</td>
                     <td>
-    <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning">Edit </a>
-    <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
-    </form>
-</td>
-                    
+                        <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

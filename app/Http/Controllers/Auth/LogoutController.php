@@ -1,0 +1,17 @@
+<?php
+// filepath: c:\xampp\htdocs\activity 4\WebDev\app\Http\Controllers\Auth\LogoutController.php
+
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
+class LogoutController extends Controller
+{
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+}
