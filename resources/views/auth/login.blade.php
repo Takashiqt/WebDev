@@ -5,6 +5,12 @@
     <title>Login</title>
 </head>
 <body>
+    @if(session('success'))
+        <div style="color: green;">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
         <div>
@@ -19,5 +25,6 @@
             <button type="submit">Login</button>
         </div>
     </form>
+    <p>Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
 </body>
 </html>

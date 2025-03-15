@@ -1,13 +1,18 @@
 <?php
-// filepath: c:\xampp\htdocs\activity 4\WebDev\routes\web.php
-
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth; // Ensure this import is present
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
-// Redirect the root URL to the Students page
-Route::get('/', [StudentController::class, 'index'])->name('home');
+// Redirect the root URL to the login page if not authenticated
+Route::get('/', function () {
+    if (Auth::check()) { // Use the Auth facade directly
+        return redirect()->route('students.index');
+    }
+    return redirect()->route('login');
+})->name('home');
 
 Route::middleware('auth')->group(function () {
     // Define route for Students page (if it's a separate page)
@@ -30,3 +35,7 @@ Route::middleware('auth')->group(function () {
 // Authentication routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
+
+// Registration routes
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register']);
